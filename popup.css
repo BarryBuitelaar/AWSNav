@@ -1,0 +1,48 @@
+body {
+  margin: 0 0 15px 0;
+  width: 250px;
+  overflow: scroll;
+  height: 300px;
+  max-height: 100%;
+}
+
+h1 {
+  padding: 5px;
+  margin: 0;
+  border-bottom: 3px solid grey;
+}
+
+ul {
+  padding: 0;
+  list-style-type: none;
+}
+
+li {
+  padding: 5px;
+  border-bottom: 3px solid #4a4a4a;;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: transparent;
+  border: 3px solid orange;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all .5s;
+}
+
+button:hover, button.selected {
+  opacity: .7;
+  background-color: #4a4a4a;
+  color: white;
+}
+
+.checkbox-container {
+  padding: 10px;
+  float: right;
+}
+
+input {
+  cursor: pointer;
+}
