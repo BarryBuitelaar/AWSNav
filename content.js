@@ -135,15 +135,22 @@ const addLogo = () => {
 }
 
 
-function checkForCurrentItems () {
+function checkForCurrentItems() {
   const setting = getStorage('AWSNavSetting')
 
   if (!setting) {
-    chrome.extension.sendMessage({}, function({ isLoaded, currentItems }) {
-      setStorage('AWSNavSetting', { isLoaded });
+    chrome.extension.sendMessage({}, function ({
+      isLoaded,
+      currentItems,
+      setting
+    }) {
       if (currentItems) {
         setStorage('AWSNavItems', currentItems);
       }
+      setStorage('AWSNavSetting', {
+        isLoaded,
+        ...setting
+      });
     });
   }
 }

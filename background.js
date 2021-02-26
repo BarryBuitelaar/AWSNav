@@ -1,22 +1,38 @@
 const setStorage = (name, data) => globalThis.storage['set'](name, data);
 const getStorage = (name) => globalThis.storage['get'](name);
 
-const passingService = ({ service }) => {
-  passToContent({ service });
+const passingService = ({
+  service
+}) => {
+  passToContent({
+    service
+  });
   return true;
 };
 
-const passingSetting = ({ setting }) => {
-  passToContent({ setting });
+const passingSetting = ({
+  setting
+}) => {
+  passToContent({
+    setting
+  });
   return true;
 };
 
 chrome.runtime.onMessage.addListener(passingService);
 chrome.runtime.onMessage.addListener(passingSetting);
 
-const passToContent = ({ service, setting }) => {
-  chrome.tabs.query({ active: true }, function(tabs) {
-    chrome.tabs.sendMessage(tabs[0].id, { service, setting }, response => {
+const passToContent = ({
+  service,
+  setting
+}) => {
+  chrome.tabs.query({
+    active: true
+  }, function (tabs) {
+    chrome.tabs.sendMessage(tabs[0].id, {
+      service,
+      setting
+    }, response => {
       if (service) {
         setStorage('AWSNavItems', response);
         chrome.runtime.sendMessage({
@@ -33,19 +49,20 @@ const passToContent = ({ service, setting }) => {
   });
 };
 
-chrome.runtime.onMessage.addListener(function({}, sender, sendResponse) {
+chrome.runtime.onMessage.addListener(function ({}, sender, sendResponse) {
   const currentItems = getStorage('AWSNavItems');
+  const navSettings = getStorage('AWSNavSetting');
+  const storage = {
+    isLoaded: true,
+    setting: navSettings ? navSettings : {}
+  }
 
   if (currentItems) {
-    sendResponse({
-      isLoaded: true,
-      currentItems: getStorage('AWSNavItems')
-    });
-  } else {
-    sendResponse({
-      isLoaded: true
-    });
+    storage['currentItems'] = currentItems;
   }
+
+  sendResponse({
+    ...storage
+  });
   return true;
 });
-
