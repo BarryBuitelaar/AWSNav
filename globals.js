@@ -1,10 +1,22 @@
 'use strict';
 
 const currentUrl = window.location.href;
-
 const url = currentUrl.slice(
   0, (currentUrl.indexOf('com') + 3)
 );
+
+const setLocalStorage = (name, data) => {
+  window.localStorage.setItem(name, JSON.stringify(data));
+};
+
+const getLocalStorage = (name) => {
+  return JSON.parse(window.localStorage.getItem(name))
+}
+
+const storage = {
+  'get': (name) => getLocalStorage(name),
+  'set': (name, data) => setLocalStorage(name, data)
+}
 
 const serviceItems = {
   "cloudformation": {title: "CloudFormation", link: `${url}/cloudformation` },
@@ -24,3 +36,4 @@ const serviceItems = {
 }
 
 globalThis.serviceItems = serviceItems;
+globalThis.storage = storage;

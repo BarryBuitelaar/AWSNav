@@ -1,18 +1,13 @@
 import {
+  getLocalStorage,
+  setLocalStorage,
+  capitalize
+} from "./utils.js";
+
+import {
   serviceItems
 } from "./services.js";
 
-const setLocalStorage = (name, data) => {
-  window.localStorage.setItem(name, JSON.stringify(data));
-};
-
-const capitalize = (string) => {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
-const getLocalStorage = (name) => {
-  return JSON.parse(window.localStorage.getItem(name))
-}
 
 const clickedService = ({
   target: {

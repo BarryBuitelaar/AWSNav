@@ -11,14 +11,15 @@
       "https://eu-central-1.console.aws.amazon.com/*",
       "https://eu-east-1.console.aws.amazon.com/*",
       "https://ca-central-1.console.aws.amazon.com/*",
-      "https://console.aws.amazon.com/*"
+      "https://console.aws.amazon.com/*",
+      "https://s3.console.aws.amazon.com/*"
     ]
   }],
   "icons": {
     "48": "./assets/inqdo-logo.png"
   },
   "background": {
-    "scripts": ["background.js"],
+    "scripts": ["background.js", "globals.js"],
     "persistent": false
   },
   "browser_action": {

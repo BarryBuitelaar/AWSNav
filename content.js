@@ -1,19 +1,15 @@
 document.body.onload = addInqdoNavigation;
 
-const setLocalStorage = (name, data) => {
-  window.localStorage.setItem(name, JSON.stringify(data));
-};
+const setStorage = (name, data) => globalThis.storage['set'](name, data);
+const getStorage = (name) => globalThis.storage['get'](name);
 
-const getLocalStorage = (name) => {
-  return JSON.parse(window.localStorage.getItem(name))
-}
 
 chrome.extension.onMessage.addListener(function ({
   service,
   setting
 }, sender, sendResponse) {
   if (service) {
-    const items = getLocalStorage('AWSNavItems');
+    const items = getStorage('AWSNavItems');
     const serviceItems = globalThis.serviceItems;
 
     const filter = items.filter(
@@ -36,31 +32,37 @@ chrome.extension.onMessage.addListener(function ({
       newItems = items;
     }
 
-    setLocalStorage('AWSNavItems', newItems);
+    setStorage('AWSNavItems', newItems);
     sendResponse(newItems);
   }
 
   if (setting !== undefined) {
-    setLocalStorage('AWSNavSetting', {
+    setStorage('AWSNavSetting', {
+      isLoaded: true,
+      openNewTab: setting
+    });
+    sendResponse({
       openNewTab: setting
     });
   }
-
   addInqdoNavigation();
   return true
 });
 
 function addInqdoNavigation() {
-  let items = getLocalStorage('AWSNavItems');
-  const setting = getLocalStorage('AWSNavSetting');
+  let items = getStorage('AWSNavItems');
+  const setting = getStorage('AWSNavSetting');
+
+  checkForCurrentItems();
 
   if (!items) {
-    setLocalStorage('AWSNavItems', []);
-    items = getLocalStorage('AWSNavItems');
+    setStorage('AWSNavItems', []);
+    items = getStorage('AWSNavItems');
   }
 
   if (!setting) {
-    setLocalStorage('AWSNavSetting', {
+    setStorage('AWSNavSetting', {
+      isLoaded: true,
       openNewTab: false
     });
   }
@@ -88,7 +90,7 @@ const addListItems = ({
 }) => {
   const {
     openNewTab
-  } = getLocalStorage('AWSNavSetting');
+  } = getStorage('AWSNavSetting');
   const ul = document.createElement("ul");
 
   const listItems = [
@@ -130,4 +132,18 @@ const addLogo = () => {
   image.src = "https://portal.inqdo.cloud/static/media/logo-cloud.bc1a9d30.png";
 
   return image;
+}
+
+
+function checkForCurrentItems () {
+  const setting = getStorage('AWSNavSetting')
+
+  if (!setting) {
+    chrome.extension.sendMessage({}, function({ isLoaded, currentItems }) {
+      setStorage('AWSNavSetting', { isLoaded });
+      if (currentItems) {
+        setStorage('AWSNavItems', currentItems);
+      }
+    });
+  }
 }
