@@ -7,6 +7,7 @@ const url = currentUrl.slice(
 );
 
 const serviceItems = {
+  "cloudfront": {title: "CloudFront", link: `${url}/cloudformation`},
   "cloudwatch": { title: "Cloudwatch", link: `${url}/cloudwatch` },
   "cognito": { title: "Cognito", link: `${url}/cognito` },
   "dynamodb": { title: "Dynamodb", link: `${url}/dynamodb` },
