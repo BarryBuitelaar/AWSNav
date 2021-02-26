@@ -38,7 +38,6 @@ const changeSetting = () => {
 chrome.runtime.onMessage.addListener(
   function (request, sender, sendResponse) {
     if (request.msg === "service_send") {
-      console.log(request)
       setLocalStorage('AWSNavItems', request['data']);
       renderNavigation();
     }
@@ -48,10 +47,11 @@ chrome.runtime.onMessage.addListener(
 );
 
 const renderNavigation = () => {
-  const items = getLocalStorage('AWSNavItems');
+  let items = getLocalStorage('AWSNavItems');
 
   if (!items) {
     setLocalStorage('AWSNavItems', []);
+    items = getLocalStorage('AWSNavItems')
   }
 
   const removeElements = (elms) => elms.forEach(el => el.remove());

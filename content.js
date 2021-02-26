@@ -51,11 +51,12 @@ chrome.extension.onMessage.addListener(function ({
 });
 
 function addInqdoNavigation() {
-  const items = getLocalStorage('AWSNavItems');
+  let items = getLocalStorage('AWSNavItems');
   const setting = getLocalStorage('AWSNavSetting');
 
   if (!items) {
     setLocalStorage('AWSNavItems', []);
+    items = getLocalStorage('AWSNavItems');
   }
 
   if (!setting) {
