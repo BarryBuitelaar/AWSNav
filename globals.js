@@ -14,8 +14,12 @@ const serviceItems = {
   "dynamodb": { title: "Dynamodb", link: `${url}/dynamodb` },
   "ec2": { title: "EC2", link: `${url}/ec2` },
   "ecs": { title: "ECS", link: `${url}/ecs` },
+  "iam": { title: "IAM", link: `${url}/iam` },
   "lambda": { title: "Lambda", link: `${url}/lambda` },
+  "rds": { title: "RDS", link: `${url}/rds` },
+  "route53": { title: "Route53", link: `${url}/route53` },
   "s3": { title: "S3", link: `${url}/s3` },
+  "vpc": { title: "VPC", link: `${url}/vpc` },
   "systems-manager": { title: "Systems Manager", link: `${url}/systems-manager` },
 }
 
