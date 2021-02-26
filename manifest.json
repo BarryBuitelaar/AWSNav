@@ -6,7 +6,11 @@
   "content_scripts": [{
     "css": ["styles.css"],
     "js": ["content.js", "globals.js"],
-    "matches": ["https://eu-west-1.console.aws.amazon.com/*", "https://console.aws.amazon.com/*"]
+    "matches": [
+      "https://eu-west-1.console.aws.amazon.com/*",
+      "https://eu-central-1.console.aws.amazon.com/*",
+      "https://console.aws.amazon.com/*"
+    ]
   }],
   "icons": {
     "48": "./assets/inqdo-logo.png"
