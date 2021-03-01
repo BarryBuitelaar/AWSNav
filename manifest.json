@@ -7,12 +7,8 @@
     "css": ["styles.css"],
     "js": ["content.js", "globals.js"],
     "matches": [
-      "https://eu-west-1.console.aws.amazon.com/*",
-      "https://eu-central-1.console.aws.amazon.com/*",
-      "https://eu-east-1.console.aws.amazon.com/*",
-      "https://ca-central-1.console.aws.amazon.com/*",
-      "https://console.aws.amazon.com/*",
-      "https://s3.console.aws.amazon.com/*"
+      "https://*.console.aws.amazon.com/*",
+      "https://console.aws.amazon.com/*"
     ]
   }],
   "icons": {

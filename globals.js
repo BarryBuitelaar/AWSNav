@@ -32,6 +32,7 @@ const serviceItems = {
   "route53": { title: "Route53", link: `${url}/route53` },
   "s3": { title: "S3", link: `${url}/s3` },
   "vpc": { title: "VPC", link: `${url}/vpc` },
+  "switchrole": { title: "SwitchRole", link: `https://signin.aws.amazon.com/switchrole` },
   "systems-manager": { title: "Systems Manager", link: `${url}/systems-manager` },
 }
 
