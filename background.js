@@ -57,9 +57,7 @@ chrome.runtime.onMessage.addListener(function ({}, sender, sendResponse) {
     setting: navSettings ? navSettings : {}
   }
 
-  if (currentItems) {
-    storage['currentItems'] = currentItems;
-  }
+  storage['currentItems'] = currentItems ? currentItems : [];
 
   sendResponse({
     ...storage

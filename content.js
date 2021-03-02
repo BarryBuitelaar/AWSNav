@@ -1,8 +1,28 @@
-document.body.onload = addInqdoNavigation;
+window.addEventListener("load", myInit, true); function myInit() {
+  chrome.extension.sendMessage({}, function ({
+    isLoaded,
+    currentItems,
+    setting
+  }) {
+    if (currentItems) {
+      setStorage('AWSNavItems', currentItems);
+    }
+    setStorage('AWSNavSetting', {
+      isLoaded,
+      ...setting
+    });
+  });
+
+  addInqdoNavigation();
+};
 
 const setStorage = (name, data) => globalThis.storage['set'](name, data);
 const getStorage = (name) => globalThis.storage['get'](name);
 
+const currentUrl = window.location.href;
+const url = currentUrl.slice(
+  0, (currentUrl.indexOf('com') + 3)
+);
 
 chrome.extension.onMessage.addListener(function ({
   service,
@@ -51,20 +71,9 @@ chrome.extension.onMessage.addListener(function ({
 
 function addInqdoNavigation() {
   let items = getStorage('AWSNavItems');
-  const setting = getStorage('AWSNavSetting');
-
-  checkForCurrentItems();
 
   if (!items) {
-    setStorage('AWSNavItems', []);
-    items = getStorage('AWSNavItems');
-  }
-
-  if (!setting) {
-    setStorage('AWSNavSetting', {
-      isLoaded: true,
-      openNewTab: false
-    });
+    items = []
   }
 
   const removeElements = (elms) => elms.forEach(el => el.remove());
@@ -110,7 +119,7 @@ const addListItems = ({
     if (title !== 'image') {
       const a = document.createElement("a");
 
-      a.href = link;
+      a.href = link.includes('http') ? link : `${url}/${link}`;
       if (openNewTab) {
         a.target = "_blank";
       }
@@ -132,25 +141,4 @@ const addLogo = () => {
   image.src = "https://portal.inqdo.cloud/static/media/logo-cloud.bc1a9d30.png";
 
   return image;
-}
-
-
-function checkForCurrentItems() {
-  const setting = getStorage('AWSNavSetting')
-
-  if (!setting) {
-    chrome.extension.sendMessage({}, function ({
-      isLoaded,
-      currentItems,
-      setting
-    }) {
-      if (currentItems) {
-        setStorage('AWSNavItems', currentItems);
-      }
-      setStorage('AWSNavSetting', {
-        isLoaded,
-        ...setting
-      });
-    });
-  }
 }

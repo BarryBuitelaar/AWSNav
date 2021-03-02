@@ -1,10 +1,5 @@
 'use strict';
 
-const currentUrl = window.location.href;
-const url = currentUrl.slice(
-  0, (currentUrl.indexOf('com') + 3)
-);
-
 const setLocalStorage = (name, data) => {
   window.localStorage.setItem(name, JSON.stringify(data));
 };
@@ -19,21 +14,21 @@ const storage = {
 }
 
 const serviceItems = {
-  "cloudformation": {title: "CloudFormation", link: `${url}/cloudformation` },
-  "cloudfront": {title: "CloudFront", link: `${url}/cloudfront` },
-  "cloudwatch": { title: "Cloudwatch", link: `${url}/cloudwatch` },
-  "cognito": { title: "Cognito", link: `${url}/cognito` },
-  "dynamodb": { title: "Dynamodb", link: `${url}/dynamodb` },
-  "ec2": { title: "EC2", link: `${url}/ec2` },
-  "ecs": { title: "ECS", link: `${url}/ecs` },
-  "iam": { title: "IAM", link: `${url}/iam` },
-  "lambda": { title: "Lambda", link: `${url}/lambda` },
-  "rds": { title: "RDS", link: `${url}/rds` },
-  "route53": { title: "Route53", link: `${url}/route53` },
-  "s3": { title: "S3", link: `${url}/s3` },
-  "vpc": { title: "VPC", link: `${url}/vpc` },
+  "cloudformation": {title: "CloudFormation", link: `cloudformation` },
+  "cloudfront": {title: "CloudFront", link: `cloudfront` },
+  "cloudwatch": { title: "Cloudwatch", link: `cloudwatch` },
+  "cognito": { title: "Cognito", link: `cognito` },
+  "dynamodb": { title: "Dynamodb", link: `dynamodb` },
+  "ec2": { title: "EC2", link: `ec2` },
+  "ecs": { title: "ECS", link: `ecs` },
+  "iam": { title: "IAM", link: `iam` },
+  "lambda": { title: "Lambda", link: `lambda` },
+  "rds": { title: "RDS", link: `rds` },
+  "route53": { title: "Route53", link: `route53` },
+  "s3": { title: "S3", link: `s3` },
+  "vpc": { title: "VPC", link: `vpc` },
   "switchrole": { title: "SwitchRole", link: `https://signin.aws.amazon.com/switchrole` },
-  "systems-manager": { title: "Systems Manager", link: `${url}/systems-manager` },
+  "systems-manager": { title: "Systems Manager", link: `systems-manager` },
 }
 
 globalThis.serviceItems = serviceItems;
